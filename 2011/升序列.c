@@ -105,7 +105,8 @@ int f(int A[], int B[])
 
 
 //解法三：使用二分查找的方式在两个等长升序数组中高效地找到中位数，通过比较并调整分割点来缩小搜索范围，直到找到合适的中位数值。
-
+#define INT_MAX 0x7fffffff;
+#define INT_MIN -0x7fffffff - 1;
 int fc(int A[], int B[], int n)
 {
     int low = 0, high = n - 1;//定义索引指向数组的首元素和末尾元素。
