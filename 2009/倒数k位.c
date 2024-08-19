@@ -5,9 +5,9 @@ typedef struct LNode
 {
     int data;
     struct LNode* next;
-}LNode, *Linklist;
+}LNode;
 
-int search_k(Linklist list, int k)
+int search_k(LNode *list, int k)
 {
     LNode *p = list->next, *q = list->next;
     int count = 0;

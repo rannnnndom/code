@@ -6,9 +6,9 @@ typedef struct LNode
 {
     int data;
     struct LNode *next;
-}LNode *Linklist;
+}LNode;
 
-int listlen(Linklist list)
+int listlen(LNode *list)
 {
     LNode *p = list->next;
     int count = 1;

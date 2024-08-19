@@ -7,7 +7,7 @@ typedef struct LNode
 {
     int data;
     struct LNode *link;
-}LNode *Linklist;
+}LNode;
 
 int abs(int n)//绝对值函数
 {
@@ -15,7 +15,7 @@ int abs(int n)//绝对值函数
     return n;
 }
 
-void f(Linklist head, int n)
+void f(LNode *head, int n)
 {
     int nums[n + 1] = {0}; // 初始化一个数组，用于存储已访问节点的绝对值
     LNode *p = head->link; // 指向链表的第一个有效节点
