@@ -1,0 +1,19 @@
+semaphore mutex = 1 //设置互斥量
+semaphore full = 500 //博物馆顾客数量
+
+cobegin
+参观者进程i:
+{
+    process customer()
+    {
+        P(full)
+        P(mutex)
+        进门
+        V(mutex)
+        参观
+        P(mutex)
+        出门
+        V(mutex)
+        V(full)
+    }
+}
