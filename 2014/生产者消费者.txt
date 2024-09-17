@@ -1,0 +1,49 @@
+semaphore mutex1 = 1 //设置互斥量
+semaphore mutex2 = 1 //设置互斥量
+semaphore empty = 1000 //设置缓冲区大小
+semaphore full = 0 //检查缓冲区是否满
+int count = 0 //检查是否
+bool flag = 0 //判断是否为同一消费者
+
+cobegin
+{
+    process producer()
+    while(True)
+    {
+        P(empty);
+        P(mutex1);
+        放入一个产品;
+        V(mutex1);
+        V(full);
+    }
+
+    process consumer()
+    while(True)
+    {
+        if(count < 10 && flag == 0)
+        {
+            P(full);
+            P(mutex2);
+            取出一个产品;
+            V(mutex2);
+            V(empty);
+            flag = 1;
+            count++;
+        }
+
+        if(count < 10 && flag == 1)
+        {
+            P(full);
+            P(mutex2);
+            取出一个产品;
+            V(mutex2);
+            V(empty);
+            count++;
+        }
+        eles if(count == 10)
+        {
+            count = 0;
+            flag = 0;
+        }
+    }
+}coend
