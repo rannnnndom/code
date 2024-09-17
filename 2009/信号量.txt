@@ -1,0 +1,39 @@
+semaphore mutex = 1
+semaphore empty = N
+semaphore odd = 0 even = 0
+
+process P1()
+while(True)
+{
+    x = produce();
+    P(empty);
+    P(mutex);
+    put();
+    V(mutex);
+    if(x % 2 == 0) 
+        V(even);
+    else
+        V(odd);
+}
+
+process P2()
+while(True)
+{
+    P(odd);
+    P(mutex);
+    getodd();
+    V(mutex);
+    V(empty);
+    countodd();
+}
+
+process P3()
+while(True)
+{
+    P(even);
+    P(mutex);
+    geteven();
+    V(mutex);
+    V(empty);
+    counteven();
+}
