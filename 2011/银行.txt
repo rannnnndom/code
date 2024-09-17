@@ -1,0 +1,31 @@
+semaphore mutex = 1 //设置互斥量
+semaphore empty = 10 //设置10个座位
+semaphore operator = 1 //设置营业员
+semaphore full = 0 //有多少个顾客
+
+cobegin
+{
+    process customer()
+    {
+        P(empty);
+        P(mutex);
+        从取号机获取一个号码;
+        等待叫号
+        V(mutex)
+        V(full)
+        P(operator)
+        获取服务        
+    }
+
+    process operator()
+    {
+        while(True)
+        {
+            P(full) //是否有顾客
+            V(empty)
+            叫号
+            为客户服务
+            V(operator)
+        }
+    }
+}coend
