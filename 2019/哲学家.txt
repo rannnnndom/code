@@ -1,0 +1,24 @@
+semaphore bowl = m //设置碗的数量
+semaphore mutex = 1 //设置互斥量
+semaphore chopstick = n
+for(int i = 0; i < n; i++)
+{
+    chopstick[i] = 1;
+}
+
+cobegin
+while(True)
+{
+    philospher i:
+    {
+        思考
+        P(mutex)
+        取碗 
+        V(mutex)
+        P(chopstick[i])
+        P(chopstick[i + 1 % n])
+        吃饭
+        V(chopstick[i])
+        V(chopstick[i + 1 % n])
+    }
+}coend
