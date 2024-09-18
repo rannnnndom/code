@@ -1,0 +1,40 @@
+semaphore empty1 = M //设置A的最大邮箱
+semaphore empty2 = N //设置B的最大邮箱
+semaphore full1 = full2 = 0 //设置邮箱的是否满
+semaphore mutex1 = 1 //设置A邮箱的互斥量
+semaphore mutex2 = 1 //设置B邮箱的互斥量
+
+cobegin
+{
+    process A()
+    while(True)
+    {
+        P(full1);
+        P(mutex1);
+        从A的邮箱中取出一个邮件;
+        V(mutex1);
+        V(empty1)
+        P(empty2)
+        回答问题并提出一个新问题;
+        P(mutex2)
+        将新邮件放入B的信箱;
+        V(mutex2)
+        V(full2)
+    }
+
+    process B()
+    while(True)
+    {
+        P(full2);
+        P(mutex2);
+        从B的邮箱中取出一个邮件;
+        V(mutex2);
+        V(empty2);
+        P(empty1);
+        回答问题并提出一个新问题;
+        P(mutex1);
+        将新邮件放入A的信箱;
+        V(mutex1);
+        V(full1)
+    }
+}coend
