@@ -1,0 +1,39 @@
+semaphore mutexy1 = 1 //设置线程1的y的互斥量
+semaphore mutexy2 = 1 //设置线程2的y的互斥量
+semaphore mutexz = 1 //设置z的互斥量
+
+cobegin
+{
+    thread1()
+    {
+        cnum w;
+        P(mutexy1);
+        w = add(x, y);
+        V(mutexy1)
+    }
+
+    thread2()
+    {
+        cnum w;
+        P(mutexy2);
+        P(mutexz);
+        w = add(y, z);
+        V(mutexy2);
+        V(mutexz);
+    }
+
+    thread3()
+    {
+        cnum w;
+        w.a = 1;
+        w.b = 1;
+        P(mutexz);
+        z = add(z, w);
+        V(mutexz)
+        P(mutexy1)
+        P(mutexy2)
+        y = add(y, w);
+        V(mutexy1)
+        V(mutexy2)
+    }
+}coend
