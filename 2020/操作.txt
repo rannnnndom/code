@@ -1,0 +1,41 @@
+semaphore ac = 0 //检查a是否完成
+semaphore bc = 0 //检查b是否完成
+semaphore ce = 0 //检查c是否完成
+semaphore de = 0 //检查d是否完成
+
+cobegin
+{
+    process A()
+    {
+        操作A
+        V(ac)
+    }
+
+    process B()
+    {
+        操作B
+        V(bc)
+    }
+
+    process C()
+    {
+        P(ac)
+        P(bc)
+        操作C
+        V(ce)
+    }
+
+    process D()
+    {
+        操作D
+        V(de)
+    }
+
+    process E()
+    {
+        P(ce)
+        P(de)
+        操作E
+    }
+}
+coend
