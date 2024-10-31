@@ -26,3 +26,5 @@ int IsExistEL(MGraph G)
     if(odd == 0 || odd == 2) return true;
     else return false;
 }
+
+//时间复杂度O(n2), 空间复杂度O(1)
